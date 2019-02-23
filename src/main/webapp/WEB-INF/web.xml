@@ -20,9 +20,6 @@
 		<servlet-name>Jersey Web Application</servlet-name>
 		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
-	<listener>
-		<listener-class>de.illilli.wikidata.service.wikidataGeoService.Initialize</listener-class>
-	</listener>
 
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
