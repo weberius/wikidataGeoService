@@ -22,7 +22,7 @@ import de.illilli.opendata.service.Config;
 import de.illilli.opendata.service.Facade;
 import de.illilli.opendata.service.Format;
 
-@Path("/entity")
+@Path("entity")
 public class Entity {
 
 	public static final String ENCODING = Config.getProperty("encoding");
@@ -45,7 +45,7 @@ public class Entity {
 
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
-	@Path("/{entity}")
+	@Path("{entity}")
 	public Response getPoiByEntity(@PathParam("entity") String entity)
 			throws IOException, ClassNotFoundException, SQLException, NamingException {
 
