@@ -6,8 +6,13 @@ Ziel dieses Projektes ist es auf räumliche Daten in wikidata per Service zuzugr
 
 Dieses Projekt befindet sich in der Entwicklung
 
+# Daten
+
+Die Applikation basiert auf Daten die in [wikidata](https://www.wikidata.org/wiki/Wikidata:Main_Page) zur Verfügung stehen. 
+
 # Technologien/ Bibliotheken
 
+- wikidata
 - Apache Jena
 - Jersey
 - Gson
@@ -69,10 +74,6 @@ Wikidata Abfrage basiert auf der Bounding Box
 	  OPTIONAL { ?place wdt:P18 ?image. }
 	  OPTIONAL { ?place wdt:P31 ?instance_of. }
 	}
-
-# Daten
-
-Die Applikation basiert auf Daten in wikidata zur Verfügung stehen. 
 
 # License
 
