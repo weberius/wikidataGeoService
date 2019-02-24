@@ -4,7 +4,7 @@ Ziel dieses Projektes ist es auf räumliche Daten in wikidata per Service zuzugr
 
 # Szenarien
 
-Dieser Service kann immer dann genutzt werden,  
+Dieser Service kann immer dann genutzt werden, wenn die Umgebung um einen Punkt herum nach Wikidata Punkten untersucht werden soll. Dabei ist es möglich, 
 
 # Entwicklungsstand
 

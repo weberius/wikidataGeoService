@@ -19,6 +19,7 @@ import org.apache.jena.query.ResultSet;
 import org.apache.jena.rdf.model.RDFNode;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.google.gson.Gson;
 
 import de.illilli.opendata.service.Config;
 import de.illilli.opendata.service.Facade;
@@ -74,8 +75,7 @@ public class CenterFacade implements Facade<String> {
 
 	@Override
 	public String getData() throws JsonProcessingException {
-		// TODO Auto-generated method stub
-		return null;
+		return new Gson().toJson(data);
 	}
 
 }
