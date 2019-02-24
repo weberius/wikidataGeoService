@@ -2,6 +2,10 @@
 
 Ziel dieses Projektes ist es auf räumliche Daten in wikidata per Service zuzugreifen. Dabei wird die Abfrage gegen wikidata per Apache Jena gekapselt. Um die Daten ohne weiteres z.B. per leaflet anzeigen zu können, werden die Ergebnisse per GeoJson ausgeliefert.
 
+# Szenarien
+
+Dieser Service kann immer dann genutzt werden,  
+
 # Entwicklungsstand
 
 Dieses Projekt befindet sich in der Entwicklung
@@ -17,12 +21,15 @@ Die Applikation basiert auf Daten die in [wikidata](https://www.wikidata.org/wik
 - Jersey
 - Gson
 - opendatalab geojson
+- Apache commoins io
 
 # Schnittstellen
 
 ## /wikidataGeoService/entity/{entity}
 
 Mit dieser Schnittstelle wird die Geolocation einer entity ausgewertet, um das Centrum der Abfrage zu bestimmen.
+
+### Wikidata Query 
 
 {entitiy} ist hier die Stadt Ulm (Q3012)
 
@@ -40,6 +47,10 @@ Mit dieser Schnittstelle wird die Geolocation einer entity ausgewertet, um das C
 	  OPTIONAL { ?place wdt:P31 ?instance_of. }
 	}
 	ORDER BY ASC(?dist)
+	
+### Rückgabe
+
+Der Service kann die Informationen sowohl json formattiert, als auch im GeoJson Format zurückgeben. 
 
 ## /wikidataGeoService/center/{x,y}&radius={radius}
 

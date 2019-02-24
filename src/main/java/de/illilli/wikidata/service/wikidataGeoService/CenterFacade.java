@@ -19,21 +19,24 @@ import org.apache.jena.query.ResultSet;
 import org.apache.jena.rdf.model.RDFNode;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.google.gson.Gson;
 
 import de.illilli.opendata.service.Config;
 import de.illilli.opendata.service.Facade;
 import de.illilli.wikidata.service.wikidataGeoService.converter.Map2PoiConverter;
+import de.illilli.wikidata.service.wikidataGeoService.converter.String2Point;
 import de.illilli.wikidata.service.wikidataGeoService.model.Poi;
+import de.illilli.wikidata.service.wikidataGeoService.model.Point;
 
-public class EntityFacade implements Facade<String> {
+public class CenterFacade implements Facade<String> {
 
-	static final String queryFileName = "/query/selectByEntity.sparql";
+	static final String queryFileName = "/query/selectByCenter.sparql";
 	static final String sparqlEndpoint = Config.getProperty("sparql.endpoint");
 
 	List<Poi> data = new ArrayList<>();
 
-	public EntityFacade(String entity) throws IOException {
+	public CenterFacade(String center) throws IOException {
+
+		Point point = new String2Point().getAsObject(center);
 
 		InputStream inputStream = EntityFacade.class.getResourceAsStream(queryFileName);
 		String queryString = IOUtils.toString(inputStream);
@@ -42,6 +45,7 @@ public class EntityFacade implements Facade<String> {
 		Query query = QueryFactory.create(queryStr.toString());
 
 		QueryExecution qexec = QueryExecutionFactory.sparqlService(sparqlEndpoint, query);
+
 		try {
 
 			ResultSet results = qexec.execSelect();
@@ -70,7 +74,8 @@ public class EntityFacade implements Facade<String> {
 
 	@Override
 	public String getData() throws JsonProcessingException {
-		return new Gson().toJson(data);
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
