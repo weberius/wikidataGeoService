@@ -1,25 +1,31 @@
-PREFIX wd: <http://www.wikidata.org/entity/>
-PREFIX wds: <http://www.wikidata.org/entity/statement/>
-PREFIX wdv: <http://www.wikidata.org/value/>
-PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-PREFIX wikibase: <http://wikiba.se/ontology#>
-PREFIX p: <http://www.wikidata.org/prop/>
-PREFIX ps: <http://www.wikidata.org/prop/statement/>
-PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX bd: <http://www.bigdata.com/rdf#>
-PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX  p:    <http://www.wikidata.org/prop/>
+PREFIX  geo:  <http://www.opengis.net/ont/geosparql#>
+PREFIX  pq:   <http://www.wikidata.org/prop/qualifier/>
+PREFIX  bd:   <http://www.bigdata.com/rdf#>
+PREFIX  ps:   <http://www.wikidata.org/prop/statement/>
+PREFIX  wdt:  <http://www.wikidata.org/prop/direct/>
+PREFIX  wds:  <http://www.wikidata.org/entity/statement/>
+PREFIX  wikibase: <http://wikiba.se/ontology#>
+PREFIX  wdv:  <http://www.wikidata.org/value/>
+PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  wd:   <http://www.wikidata.org/entity/>
 
-SELECT ?place ?placeLabel ?image ?coordinate_location ?dist ?instance_of ?instance_ofLabel 
-WHERE {
-  SERVICE wikibase:around {
-    ?place wdt:P625 ?coordinate_location.
-    bd:serviceParam wikibase:center "Point(9.9882203 48.396738)"^^geo:wktLiteral .
-    bd:serviceParam wikibase:radius "0.1".
-    bd:serviceParam wikibase:distance ?dist.
+SELECT  ?place ?placeLabel ?image ?coordinate_location ?dist ?instance_of ?instance_ofLabel
+WHERE
+  { SERVICE wikibase:around
+      { ?place    wdt:P625           ?coordinate_location .
+        bd:serviceParam
+                  wikibase:center    "Point(9.9882203 48.396738)"^^geo:wktLiteral ;
+                  wikibase:radius    "0.1" ;
+                  wikibase:distance  ?dist
+      }
+    SERVICE wikibase:label
+      { bd:serviceParam
+                  wikibase:language  "[AUTO_LANGUAGE],de"
+      }
+    OPTIONAL
+      { ?place  wdt:P18  ?image }
+    OPTIONAL
+      { ?place  wdt:P31  ?instance_of }
   }
-  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],de". }
-  OPTIONAL { ?place wdt:P18 ?image. }
-  OPTIONAL { ?place wdt:P31 ?instance_of. }
-}
 ORDER BY ASC(?dist)
